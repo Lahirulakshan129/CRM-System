@@ -1,83 +1,96 @@
-// src/pages/Login.jsx
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const Login = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  const { login } = useAuth()
-  const navigate = useNavigate()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
-    setLoading(true)
-
+    e.preventDefault();
+    setError('');
+    setLoading(true);
     try {
-      await login(email, password)
-      navigate('/dashboard')
+      await login(email, password);
+      navigate('/dashboard');
     } catch (err) {
-      setError(err.message)
+      setError(err.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
+
+  const inputStyle =
+    'w-full px-4 py-2.5 rounded-lg bg-gray-50 border border-gray-100 text-gray-800 placeholder-gray-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-indigo-500';
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+
+      <div className="w-full max-w-md bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
+
+        {/* Header */}
+        <div className="text-center mb-6">
+          <h2 className="text-xl font-semibold text-gray-800">
             CRM Lead Management
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Demo: admin@crm.com / password
+          <p className="text-sm text-gray-500 mt-1">
+            Sign in to continue
           </p>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
-              />
-            </div>
-            <div>
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
-              />
-            </div>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-4">
+
+          <div>
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={inputStyle}
+              placeholder="Email address"
+            />
+          </div>
+
+          <div>
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={inputStyle}
+              placeholder="Password"
+            />
           </div>
 
           {error && (
-            <div className="text-red-600 text-sm text-center">{error}</div>
+            <div className="text-sm text-rose-500 bg-rose-50 p-2 rounded-lg">
+              {error}
+            </div>
           )}
 
-          <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
-            >
-              {loading ? 'Signing in...' : 'Sign in'}
-            </button>
-          </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-2.5 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 disabled:opacity-50"
+          >
+            {loading ? 'Signing in...' : 'Sign in'}
+          </button>
+
         </form>
+
+        {/* Footer hint */}
+        <p className="text-xs text-gray-400 text-center mt-6">
+          Demo: admin@crm.com / password
+        </p>
+
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
