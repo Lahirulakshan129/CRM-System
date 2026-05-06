@@ -34,13 +34,13 @@ const LeadDetails = () => {
 
   const getStatusColor = (status) => {
     const colors = {
-      New: 'bg-blue-100 text-blue-800',
-      Qualified: 'bg-purple-100 text-purple-800',
-      Won: 'bg-green-100 text-green-800',
-      Lost: 'bg-red-100 text-red-800',
-      Contacted: 'bg-yellow-100 text-yellow-800'
+      New: 'bg-blue-50 text-blue-700',
+      Qualified: 'bg-purple-50 text-purple-700',
+      Won: 'bg-emerald-50 text-emerald-700',
+      Lost: 'bg-rose-50 text-rose-700',
+      Contacted: 'bg-amber-50 text-amber-700'
     };
-    return colors[status] || 'bg-gray-100 text-gray-800';
+    return colors[status] || 'bg-gray-50 text-gray-700';
   };
 
   if (loading || !lead) return <LoadingSpinner />;
@@ -50,71 +50,100 @@ const LeadDetails = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">Lead Details</h1>
+    <div className="w-full px-2 sm:px-0 space-y-6">
+      
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <button
+            onClick={() => navigate('/leads')}
+            className="text-sm text-gray-500 hover:text-gray-700 mb-2"
+          >
+            ← Back to Leads
+          </button>
+          <h1 className="text-2xl font-semibold text-gray-800 tracking-tight">
+            Lead Details
+          </h1>
+        </div>
+
         <button
           onClick={() => navigate(`/leads/${id}/edit`)}
-          className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
+          className="px-4 py-2 text-sm bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
         >
-          Edit Lead
+          Edit
         </button>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Info Card */}
+      <div className="rounded-xl border border-gray-100 bg-white shadow-sm">
+        <div className="p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
           <div>
-            <h3 className="text-sm font-medium text-gray-500">Lead Name</h3>
-            <p className="mt-1 text-lg text-gray-900">{lead.name}</p>
+            <p className="text-xs text-gray-500 mb-1">Lead Name</p>
+            <p className="text-gray-800 font-medium">{lead.name}</p>
           </div>
+
           <div>
-            <h3 className="text-sm font-medium text-gray-500">Company</h3>
-            <p className="mt-1 text-gray-900">{lead.company}</p>
+            <p className="text-xs text-gray-500 mb-1">Company</p>
+            <p className="text-gray-800">{lead.company}</p>
           </div>
+
           <div>
-            <h3 className="text-sm font-medium text-gray-500">Email</h3>
-            <p className="mt-1 text-gray-900">{lead.email}</p>
+            <p className="text-xs text-gray-500 mb-1">Email</p>
+            <p className="text-gray-800">{lead.email}</p>
           </div>
+
           <div>
-            <h3 className="text-sm font-medium text-gray-500">Phone</h3>
-            <p className="mt-1 text-gray-900">{lead.phone || 'Not provided'}</p>
+            <p className="text-xs text-gray-500 mb-1">Phone</p>
+            <p className="text-gray-800">{lead.phone || 'Not provided'}</p>
           </div>
+
           <div>
-            <h3 className="text-sm font-medium text-gray-500">Status</h3>
-            <p className="mt-1">
-              <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(lead.status)}`}>
-                {lead.status}
-              </span>
+            <p className="text-xs text-gray-500 mb-1">Status</p>
+            <span className={`px-2 py-1 text-xs rounded-md ${getStatusColor(lead.status)}`}>
+              {lead.status}
+            </span>
+          </div>
+
+          <div>
+            <p className="text-xs text-gray-500 mb-1">Deal Value</p>
+            <p className="text-gray-800 font-medium">
+              ${(lead.dealValue || 0).toLocaleString()}
             </p>
           </div>
+
           <div>
-            <h3 className="text-sm font-medium text-gray-500">Deal Value</h3>
-            <p className="mt-1 text-gray-900">${(lead.dealValue || 0).toLocaleString()}</p>
+            <p className="text-xs text-gray-500 mb-1">Source</p>
+            <p className="text-gray-800">{lead.source}</p>
           </div>
+
           <div>
-            <h3 className="text-sm font-medium text-gray-500">Lead Source</h3>
-            <p className="mt-1 text-gray-900">{lead.source}</p>
+            <p className="text-xs text-gray-500 mb-1">Salesperson</p>
+            <p className="text-gray-800">{lead.assignedSalesperson}</p>
           </div>
+
           <div>
-            <h3 className="text-sm font-medium text-gray-500">Assigned Salesperson</h3>
-            <p className="mt-1 text-gray-900">{lead.assignedSalesperson}</p>
+            <p className="text-xs text-gray-500 mb-1">Created</p>
+            <p className="text-gray-800">{formatDate(lead.createdAt)}</p>
           </div>
+
           <div>
-            <h3 className="text-sm font-medium text-gray-500">Created Date</h3>
-            <p className="mt-1 text-gray-900">{formatDate(lead.createdAt)}</p>
+            <p className="text-xs text-gray-500 mb-1">Updated</p>
+            <p className="text-gray-800">{formatDate(lead.updatedAt)}</p>
           </div>
-          <div>
-            <h3 className="text-sm font-medium text-gray-500">Last Updated</h3>
-            <p className="mt-1 text-gray-900">{formatDate(lead.updatedAt)}</p>
-          </div>
+
         </div>
       </div>
 
-      <NotesSection
-        notes={lead.notes || []}
-        onAddNote={handleAddNote}
-        isAdding={isAddingNote}
-      />
+      {/* Notes */}
+      <div className="rounded-xl border border-gray-100 bg-white shadow-sm p-5">
+        <NotesSection
+          notes={lead.notes || []}
+          onAddNote={handleAddNote}
+          isAdding={isAddingNote}
+        />
+      </div>
+
     </div>
   );
 };

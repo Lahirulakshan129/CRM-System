@@ -39,29 +39,41 @@ const Leads = () => {
   if (loading) return <LoadingSpinner />;
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Leads</h1>
+    <div className="w-full px-2 sm:px-0">
+      {/* Header Section */}
+      <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800 tracking-tight">
+            Leads
+          </h1>
+          <p className="text-sm text-gray-500 mt-1">Manage and track all your leads</p>
+        </div>
         <button
           onClick={() => navigate('/leads/new')}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-xl hover:bg-indigo-100 transition-all duration-200 text-sm font-medium border border-indigo-100"
         >
-          Create Lead
+          + Create Lead
         </button>
       </div>
 
-      <FilterBar
-        filters={filters}
-        onFilterChange={handleFilterChange}
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
-      />
+      {/* Filter Section */}
+      <div className="mb-6">
+        <FilterBar
+          filters={filters}
+          onFilterChange={handleFilterChange}
+          searchTerm={searchTerm}
+          onSearchChange={setSearchTerm}
+        />
+      </div>
 
-      <LeadTable
-        leads={leads}
-        onDelete={handleDelete}
-        deletingId={deletingId}
-      />
+      {/* Leads Table */}
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+        <LeadTable
+          leads={leads}
+          onDelete={handleDelete}
+          deletingId={deletingId}
+        />
+      </div>
     </div>
   );
 };
