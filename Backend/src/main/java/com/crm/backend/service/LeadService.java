@@ -1,4 +1,5 @@
 package com.crm.backend.service;
+
 import com.crm.backend.dto.LeadRequest;
 import com.crm.backend.dto.LeadResponse;
 import com.crm.backend.dto.NoteRequest;
@@ -7,10 +8,11 @@ import com.crm.backend.entity.Lead;
 import com.crm.backend.entity.Note;
 import com.crm.backend.repository.LeadRepository;
 import com.crm.backend.repository.NoteRepository;
+import jakarta.persistence.criteria.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import jakarta.persistence.criteria.Predicate;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

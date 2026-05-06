@@ -1,7 +1,6 @@
 package com.crm.backend.entity;
 import jakarta.persistence.*;
 import lombok.Data;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
