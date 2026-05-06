@@ -83,11 +83,6 @@ const Login = () => {
 
         </form>
 
-        {/* Footer hint */}
-        <p className="text-xs text-gray-400 text-center mt-6">
-          Demo: admin@crm.com / password
-        </p>
-
       </div>
     </div>
   );
