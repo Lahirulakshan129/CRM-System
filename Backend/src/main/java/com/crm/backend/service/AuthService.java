@@ -4,6 +4,7 @@ import com.crm.backend.config.JwtUtil;
 import com.crm.backend.dto.AuthResponse;
 import com.crm.backend.dto.LoginRequest;
 import com.crm.backend.entity.User;
+import com.crm.backend.enums.UserRole;
 import com.crm.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -43,7 +44,7 @@ public class AuthService {
             admin.setEmail("admin@crm.com");
             admin.setPassword(passwordEncoder.encode("password"));
             admin.setName("Admin User");
-            admin.setRole("ADMIN");
+            admin.setRole(UserRole.USER);
             userRepository.save(admin);
         }
     }

@@ -1,5 +1,7 @@
 package com.crm.backend.entity;
 
+import com.crm.backend.enums.LeadSource;
+import com.crm.backend.enums.LeadStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,9 +19,14 @@ public class Lead {
     private String company;
     private String email;
     private String phone;
-    private String source;
+
+    @Enumerated(EnumType.STRING)
+    private LeadSource source;
     private String assignedSalesperson;
-    private String status;
+
+    @Enumerated(EnumType.STRING)
+    private LeadStatus status;
+
     private Double dealValue;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
