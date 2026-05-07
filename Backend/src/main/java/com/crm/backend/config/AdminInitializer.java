@@ -1,5 +1,6 @@
 package com.crm.backend.config;
 import com.crm.backend.entity.User;
+import com.crm.backend.enums.UserRole;
 import com.crm.backend.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +20,7 @@ public class AdminInitializer {
                 admin.setName("Admin");
                 admin.setEmail(adminEmail);
                 admin.setPassword(passwordEncoder.encode("password"));
-                admin.setRole("ADMIN");
+                admin.setRole(UserRole.ADMIN);
 
                 userRepository.save(admin);
 

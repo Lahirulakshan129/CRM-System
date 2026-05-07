@@ -1,4 +1,5 @@
 package com.crm.backend.entity;
+import com.crm.backend.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,5 +15,7 @@ public class User {
     @Column(nullable = false)
     private String password;
     private String name;
-    private String role = "USER";
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role = UserRole.USER;
 }
